@@ -102,7 +102,7 @@
     </div>
 
     <div class="w3-twothird">
-      <h1>Detalhes da compra</h1>
+      <h1>Detalhes da compra:</h1>
       <h5 style="text-align: justify" class="w3-padding-32">&emsp;&emsp;&emsp;Faça seu pedido na página de agendamentos.
 
       <p style="text-align: justify" class="w3-text-grey">&emsp;&emsp;&emsp;No momento em que você solicitar um pedido, o administrador entrará em ação transformando você em um cliente. O produto é fabricado a mão em nosso estabelecimento, para chegar até você pelos correios. Após isso é só aproveitar seu produto de artesanato!</p>
