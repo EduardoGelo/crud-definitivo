@@ -8,7 +8,7 @@ class Cliente extends Model
 {
     protected $table = 'clientes';
 
-    protected $fillable = ['nome', 'email', 'cpf', 'data_nasc'];
+    protected $fillable = ['nome', 'email', 'cpf'];
 
     public $timestamps = false;
 

@@ -1,6 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artes da Tia Eva</title>
+</head>
+<body>
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
+
+        <x-application-logo style="height: 16px; width: 32px;" class="block fill-current text-gray-800" />
+
+        <div class="flex items-center justify-center font-bold text-2xl">
+            <h1>REGISTRAR</h1>
+        </div>
 
         <!-- Name -->
         <div>
@@ -44,9 +58,12 @@
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+            <button class="bg-pink-500 hover:bg-pink-900 text-white rounded-md px-4 py-1 ms-3">
+                    {{ __('Register') }}
+                </button>
         </div>
     </form>
 </x-guest-layout>
+
+</body>
+</html>

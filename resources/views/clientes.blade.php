@@ -18,15 +18,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("Cadastro de clientes") }}
-                    <br>
-                    <br><p><a href="" class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Lista de categorias</a></p>
-                    <br>
-                    <p><a href="" class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Lista de produtos</a></p>
                     <br><div class="flex items-center justify-between">
                         <h1 class="mb-0 text-3xl">Lista de clientes</h1>
-                        <a href="" class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Adicionar cliente</a>
-                        <!-- coloca a rota de adicionar cliente ai no href -->
+                        <a href="{{ route('clientes.create') }}" class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Adicionar cliente</a>
                     </div>
                     <br>
                     <hr />
@@ -55,18 +49,19 @@
                 <td class="px-6 py-4 whitespace-nowrap text-center">{{$cliente->cpf}}</td>
                 <td class="px-6 py-4 whitespace-nowrap flex justify-center space-x-2">
                                     <div class="flex space-x-2" role="group" aria-label="Clientes">
-                                        <a href="{{ route('clientes.edit', ['cliente' => $cliente->id]) }} type="button" class="px-4 py-2 text-white bg-gray-500 hover:bg-gray-600 rounded"">Editar</a>
-                                        <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" style="display:inline">
+                                        <a href="{{ route('clientes.edit', ['cliente' => $cliente->id]) }}" type="button" class="px-4 py-2 text-white bg-gray-500 hover:bg-gray-600 rounded">Editar</a>
+                                        
+                                        <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este cliente?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded">Deletar</button>
-                                        </form> 
+                                            <button type="submit" class="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded">Excluir</button>
+                                        </form>
                                     </div>
                                 </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="" colspan="5">Sem clientes cadastrados</td>
+                                    <td class="mb-0 text-3xl" colspan="5">Sem clientes cadastrados</td>
                                 </tr>
                                 @endforelse
                                 </tbody>
