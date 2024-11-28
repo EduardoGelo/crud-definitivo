@@ -38,15 +38,15 @@
                                 <br><br>
                                 <input type="text"
                                     class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
-                                    name="nome" value="{{ $produto->nome }}" required>
+                                    name="nome" placeholder="Nome" value="{{ $produto->nome }}" required>
                                 <br><br>
                                 <input type="decimal"
                                     class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
-                                    name="preco" value="{{$produto->preco}}" required>
+                                    name="preco" placeholder="Preço" value="{{$produto->preco}}" required>
                                 <br><br>
                                 <input type="number"
                                     class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
-                                    name="quantidade" value="{{ $produto->quantidade }}" required>
+                                    name="quantidade" placeholder="Quantidade" value="{{ $produto->quantidade }}" required>
                                 <br><br>
                                 <select name="categorias_id"
                                     class="border border-gray-300 rounded-md p-2 w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"

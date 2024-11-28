@@ -31,11 +31,11 @@
                         @csrf
                         <input type="hidden" name="_method" value="PUT">
                         <br><br>
-                        <input type="text" class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70" name="nome" value="{{ $cliente->nome }}" >
+                        <input type="text" class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70" name="nome" placeholder="Nome" value="{{ $cliente->nome }}" required>
                         <br><br>
-                        <input type="text" class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70" name="email" value="{{$cliente->email}}" >
+                        <input type="text" class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70" name="email" placeholder="E-mail" value="{{$cliente->email}}" required>
                         <br><br>
-                        <input type="text" class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70" name="cpf" value="{{ $cliente->cpf }}" >
+                        <input type="text" class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70" name="cpf" placeholder="CPF" value="{{ $cliente->cpf }}" required>
                         <br><br>
                         <button class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" type="submit">Enviar</button>
                     </form>
