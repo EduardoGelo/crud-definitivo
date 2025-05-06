@@ -39,14 +39,23 @@
                                 <input type="text"
                                     class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
                                     name="nome" placeholder="Nome" value="{{ $produto->nome }}" required>
+                                    @error('nome')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
                                 <br><br>
                                 <input type="decimal"
                                     class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
                                     name="preco" placeholder="Preço" value="{{$produto->preco}}" required>
+                                    @error('preco')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
                                 <br><br>
                                 <input type="number"
                                     class="border border-gray-300 rounded-md p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
                                     name="quantidade" placeholder="Quantidade" value="{{ $produto->quantidade }}" required>
+                                    @error('quantidade')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
                                 <br><br>
                                 <select name="categorias_id"
                                     class="border border-gray-300 rounded-md p-2 w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
@@ -59,6 +68,9 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('categorias_id')
+        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+    @enderror
                                 <br><br>
                                 <button
                                     class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"

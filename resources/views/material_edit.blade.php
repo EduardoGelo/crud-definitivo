@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=], initial-scale=1.0">
-    <title>Adicionar produto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Material</title>
 </head>
 
 <body>
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Adicionar produto') }}
+                {{ __('Editar Material') }}
             </h2>
         </x-slot>
 
@@ -20,65 +20,58 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
-                            {{ __("Adicionar produto") }}
+                            {{ __("Editar Material") }}
                             <br><br>
 
                             @if (session()->has('message'))
                                 {{ session()->get('message') }}
                             @endif
 
-                            <br>
-                            <br>
-                            <p><a href="{{ route('produtos.index') }}"
-                                    class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Voltar</a>
-                            </p>
                             <br><br>
-                            <form action="{{ route('produtos.store') }}" method="post">
+                            <p><a href="{{ route('materiais.index') }}"
+                                  class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Voltar</a>
+                            </p>
+                            <form action="{{ route('materiais.update', ['material' => $material->id]) }}" method="post">
                                 @csrf
+                                @method('PUT')
+                                <br><br>
+
                                 <input type="text"
                                     class="border border-gray-300 rounded-md p-2 w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
-                                    name="nome" placeholder="Nome" value="{{ old('nome') }}" required>
+                                    name="nome" placeholder="Nome" value="{{ old('nome', $material->nome) }}" required>
                                 @error('nome')
-                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                                 @enderror
                                 <br><br>
-                            
-                                <input type="number" step="0.01"
-                                    class="border border-gray-300 rounded-md p-2 w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
-                                    name="preco" placeholder="Preço" value="{{ old('preco') }}" required>
-                                @error('preco')
-                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                @enderror
-                                <br><br>
-                            
+
                                 <input type="number"
                                     class="border border-gray-300 rounded-md p-2 w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
-                                    name="quantidade" placeholder="Quantidade" value="{{ old('quantidade') }}" required>
+                                    name="quantidade" placeholder="Quantidade" value="{{ old('quantidade', $material->quantidade) }}" required>
                                 @error('quantidade')
-                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                                 @enderror
                                 <br><br>
-                            
-                                <select name="categorias_id"
+
+                                <input type="text"
                                     class="border border-gray-300 rounded-md p-2 w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
-                                    required>
-                                    <option value="" disabled selected hidden>Selecione a categoria desejada</option>
-                                    @foreach ($categorias as $categoria)
-                                        <option value="{{ $categoria->id }}" {{ old('categorias_id') == $categoria->id ? 'selected' : '' }}>
-                                            {{ $categoria->nome }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('categorias_id')
-                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    name="unidade_medida" placeholder="Unidade de Medida" value="{{ old('unidade_medida', $material->unidade_medida) }}" required>
+                                @error('unidade_medida')
+                                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                                 @enderror
                                 <br><br>
-                            
+
+                                <input type="text"
+                                    class="border border-gray-300 rounded-md p-2 w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 shadow-sm focus:shadow-lg placeholder-gray-400 placeholder-opacity-70"
+                                    name="categoria" placeholder="Categoria" value="{{ old('categoria', $material->categoria) }}" required>
+                                @error('categoria')
+                                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                                @enderror
+                                <br><br>
+
                                 <button
                                     class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                                    type="submit">Enviar</button>
+                                    type="submit">Atualizar</button>
                             </form>
-                            
                         </div>
                     </div>
                 </div>

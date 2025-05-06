@@ -3,89 +3,78 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
+use Exception;
+
 class CategoriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-     public readonly Categoria $categoria;
+    public readonly Categoria $categoria;
 
     public function __construct()
     {
         $this->categoria = new Categoria();
     }
+
     public function index()
     {
-        $categorias = $this->categoria->All();
-
+        $categorias = $this->categoria->all();
         return view('categorias', ['categorias' => $categorias]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('categoria_create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
-        $created = $this->categoria->create([
-            'nome' => $request->input('nome'),
-        ]);
+        try {
+            $created = $this->categoria->create([
+                'nome' => $request->input('nome'),
+            ]);
 
-        if ($created)
-        {
-            return redirect()->back()->with('message', 'Criado com sucesso');
+            if ($created) {
+                return redirect()->route('categorias.index')->with('success', 'Categoria criada com sucesso!');
+            }
+
+            return redirect()->back()->with('error', 'Erro ao criar categoria.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao criar categoria.');
         }
-
-        return redirect()->back()->with('message', 'Algo deu errado');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Categoria $categoria)
     {
         // return view('categoria.show', ['categoria' => $categoria]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Categoria $categoria)
     {
         return view('categoria_edit', ['categoria' => $categoria]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(CategoriaRequest $request, string $id)
     {
-        $updated = $this->categoria->where('id', $id)->update($request->except(['_token', '_method']));
+        try {
+            $updated = $this->categoria->where('id', $id)->update([
+                'nome' => $request->input('nome'),
+            ]);
 
-        if ($updated)
-        {
-            return redirect()->back()->with('message', 'Atualizado com sucesso');
+            if ($updated) {
+                return redirect()->route('categorias.index')->with('success', 'Categoria atualizada com sucesso!');
+            }
+
+            return redirect()->back()->with('error', 'Erro ao atualizar categoria.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao atualizar categoria.');
         }
-
-        return redirect()->back()->with('message', 'Algo deu errado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $this->categoria->where('id', $id)->delete();
 
-        return redirect()->route('categorias.index');
+        return redirect()->route('categorias.index')->with('success', 'Categoria removida com sucesso!');
     }
 }

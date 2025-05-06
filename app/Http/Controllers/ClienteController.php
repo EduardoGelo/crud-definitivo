@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ClienteRequest;
 use App\Models\Cliente;
+use Exception;
+
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public readonly Cliente $cliente;
 
     public function __construct()
@@ -16,81 +16,61 @@ class ClienteController extends Controller
         $this->cliente = new Cliente();
     }
 
-
     public function index()
     {
-        
-        $clientes = $this->cliente->All();
-
+        $clientes = $this->cliente->all();
         return view('clientes', ['clientes' => $clientes]);
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('cliente_create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(ClienteRequest $request)
     {
-        $created = $this->cliente->create([
-            'nome' => $request->input('nome'),
-            'email' => $request->input('email'),
-            'cpf' => $request->input('cpf')
-        ]);
+        try {
+            $created = $this->cliente->create($request->validated());
 
-        if ($created)
-        {
-            return redirect()->back()->with('message', 'Criado com sucesso');
+            if ($created) {
+                return redirect()->route('clientes.index')->with('success', 'Cliente adicionado com sucesso!');
+            }
+
+            return redirect()->back()->with('error', 'Erro ao adicionar cliente.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao adicionar cliente.');
         }
-
-        return redirect()->back()->with('message', 'Algo deu errado');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Cliente $cliente)
     {
         // return view('cliente.show', ['cliente' => $cliente]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Cliente $cliente)
     {
         return view('cliente_edit', ['cliente' => $cliente]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(ClienteRequest $request, string $id)
     {
-        $updated = $this->cliente->where('id', $id)->update($request->except(['_token', '_method']));
+        try {
+            $updated = $this->cliente->where('id', $id)->update($request->validated());
 
-        if ($updated)
-        {
-            return redirect()->back()->with('message', 'Atualizado com sucesso');
+            if ($updated) {
+                return redirect()->route('clientes.index')->with('success', 'Cliente atualizado com sucesso!');
+            }
+
+            return redirect()->back()->with('error', 'Erro ao atualizar cliente.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao atualizar cliente.');
         }
-
-        return redirect()->back()->with('message', 'Algo deu errado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $this->cliente->where('id', $id)->delete();
 
-        return redirect()->route('clientes.index');
+        return redirect()->route('clientes.index')->with('success', 'Cliente removido com sucesso!');
     }
 }

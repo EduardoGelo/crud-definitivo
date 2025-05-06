@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ProdutoRequest;
 use App\Models\Produto;
 use App\Models\Categoria;
+
 class ProdutoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
-     public readonly Produto $produto;
+    private Produto $produto;
 
     public function __construct()
     {
         $this->produto = new Produto();
     }
+
     public function index()
     {
-        $produtos = Produto::With('categorias')->get();
+        $produtos = Produto::with('categorias')->get();
 
         return view('produtos', ['produtos' => $produtos]);
     }
@@ -29,16 +30,15 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all(); 
+        $categorias = Categoria::all();
 
-        // Retornar a view com as categorias
         return view('produto_create', compact('categorias'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProdutoRequest $request) 
     {
         $created = $this->produto->create([
             'nome' => $request->input('nome'),
@@ -47,12 +47,11 @@ class ProdutoController extends Controller
             'categorias_id' => $request->input('categorias_id')
         ]);
 
-        if ($created)
-        {
-            return redirect()->back()->with('message', 'Criado com sucesso');
+        if ($created) {
+            return redirect()->route('produtos.index')->with('success', 'Produto cadastrado com sucesso!');
         }
 
-        return redirect()->back()->with('message', 'Algo deu errado');
+        return redirect()->back()->with('error', 'Algo deu errado ao cadastrar o produto.');
     }
 
     /**
@@ -68,25 +67,23 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        $categorias = Categoria::all(); 
+        $categorias = Categoria::all();
 
-        // Retornar a view com as categorias
         return view('produto_edit', compact('categorias', 'produto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProdutoRequest $request, string $id)
     {
         $updated = $this->produto->where('id', $id)->update($request->except(['_token', '_method']));
 
-        if ($updated)
-        {
-            return redirect()->back()->with('message', 'Atualizado com sucesso');
+        if ($updated) {
+            return redirect()->route('produtos.index')->with('success', 'Produto atualizado com sucesso!');
         }
 
-        return redirect()->back()->with('message', 'Algo deu errado');
+        return redirect()->back()->with('error', 'Algo deu errado ao atualizar o produto.');
     }
 
     /**
@@ -96,6 +93,6 @@ class ProdutoController extends Controller
     {
         $this->produto->where('id', $id)->delete();
 
-        return redirect()->route('produtos.index');
+        return redirect()->route('produtos.index')->with('success', 'Produto removido com sucesso!');
     }
 }

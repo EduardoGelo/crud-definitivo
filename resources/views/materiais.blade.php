@@ -23,17 +23,17 @@
                             <br>
                             <div class="mb-4">
                                 <span class="text-lg font-semibold text-gray-700">
-                                    Total de produtos cadastrados: 
+                                    Total de materiais cadastrados: 
                                 </span>
                                 <span class="text-lg font-bold text-pink-700">
-                                    {{ $produtos->count() }}
+                                    {{ $materiais->count() }}
                                 </span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <h1 class="mb-0 text-3xl">Lista de produtos</h1>
-                                <a href="{{ route('produtos.create') }}"
+                                <h1 class="mb-0 text-3xl">Lista de Materiais</h1>
+                                <a href="{{ route('materiais.create') }}"
                                     class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Adicionar
-                                    produto</a>
+                                    Material</a>
                             </div>
                             <br>
                             <hr />
@@ -75,10 +75,10 @@
                                                 Nome</th>
                                             <th
                                                 class="px-6 py-3 w-1/6 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Preço</th>
+                                                Quantidade</th>
                                             <th
                                                 class="px-6 py-3 w-1/6 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Quantidade</th>
+                                                Unidade de Medida</th>
                                             <th
                                                 class="px-6 py-3 w-1/6 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Categoria</th>
@@ -88,23 +88,24 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach ($produtos as $produto)
+                                        @foreach ($materiais as $material)
                                             <tr class="bg-white border-b">
 
-                                                <td class="px-6 py-4 whitespace-nowrap">{{$produto->nome}}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-center">{{$produto->preco}}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-center">{{$produto->quantidade}}
+                                                <td class="px-6 py-4 whitespace-nowrap">{{ $material->nome }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-center">{{ $material->quantidade }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-center">{{ $material->unidade_medida }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    {{$produto->categorias->nome}}</td>
+                                                    {{ $material->categoria }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap flex justify-center space-x-2">
-                                                    <div class="flex space-x-2" role="group" aria-label="Produtos">
-                                                        <a href="{{ route('produtos.edit', ['produto' => $produto->id]) }}"
+                                                    <div class="flex space-x-2" role="group" aria-label="Ações">
+                                                        <a href="{{ route('materiais.edit', ['material' => $material->id]) }}"
                                                             type="button"
                                                             class="px-4 py-2 text-white bg-gray-500 hover:bg-gray-600 rounded">Editar</a>
-                                                        <form action="{{ route('produtos.destroy', $produto->id) }}"
+                                                        <form action="{{ route('materiais.destroy', $material->id) }}"
                                                             method="POST"
-                                                            onsubmit="return confirm('Você tem certeza que deseja excluir este produto?');">
+                                                            onsubmit="return confirm('Você tem certeza que deseja excluir este material?');">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"

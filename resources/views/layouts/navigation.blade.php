@@ -15,6 +15,7 @@
                 <a href="{{ route('clientes.index') }}" class="bg-white text-pink-400 px-4 py-2 font-bold rounded hover:bg-pink-400 hover:text-white transition duration-100">Clientes</a>
                 <a href="{{ route('produtos.index') }}" class="bg-white text-pink-400 px-4 py-2 font-bold rounded hover:bg-pink-400 hover:text-white transition duration-100">Produtos</a>
                 <a href="{{ route('categorias.index') }}" class="bg-white text-pink-400 px-4 py-2 font-bold rounded hover:bg-pink-400 hover:text-white transition duration-100">Categorias</a>
+                <a href="{{ route('materiais.index') }}" class="bg-white text-pink-400 px-4 py-2 font-bold rounded hover:bg-pink-400 hover:text-white transition duration-100">Materiais</a>
             </div>
 
             <!-- Settings Dropdown -->

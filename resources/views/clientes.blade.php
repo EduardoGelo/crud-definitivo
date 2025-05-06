@@ -18,18 +18,49 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <br><div class="flex items-center justify-between">
+                    <br>
+                    <div class="mb-4">
+                        <span class="text-lg font-semibold text-gray-700">
+                            Total de clientes cadastrados: 
+                        </span>
+                        <span class="text-lg font-bold text-pink-700">
+                            {{ $clientes->count() }}
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between">
                         <h1 class="mb-0 text-3xl">Lista de clientes</h1>
                         <a href="{{ route('clientes.create') }}" class="bg-pink-500 text-white font-bold py-2 px-4 rounded hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Adicionar cliente</a>
                     </div>
                     <br>
                     <hr />
-                    <!-- checa onde ta esse success -->
                     @if(Session::has('success'))
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                        {{ Session::get('success') }}
-                    </div>
-                    @endif
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-3" role="alert" id="successAlert">
+        {{ Session::get('success') }}
+        <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3 text-green-700" onclick="document.getElementById('successAlert').remove()">
+            <svg class="fill-current h-6 w-6" role="button" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20">
+                <title>Fechar</title>
+                <path d="M14.348 5.652a1 1 0 10-1.414-1.414L10 7.172 7.066 4.238a1 1 0 10-1.414 1.414L8.828 10l-3.176 3.176a1 1 0 101.414 1.414L10 12.828l3.176 3.176a1 1 0 101.414-1.414L11.172 10l3.176-3.176z" />
+            </svg>
+        </button>
+    </div>
+@endif
+
+@if(Session::has('error'))
+    <div id="errorAlert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+        <strong class="font-bold">Erro!</strong>
+        <span class="block sm:inline">{{ Session::get('error') }}</span>
+        <button type="button" onclick="document.getElementById('errorAlert').remove()" class="absolute top-0 bottom-0 right-0 px-4 py-3 text-red-700">
+            <svg class="fill-current h-6 w-6" role="button" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 20 20">
+                <title>Fechar</title>
+                <path d="M14.348 5.652a1 1 0 10-1.414-1.414L10 7.172 7.066 4.238a1 1 0 10-1.414 1.414L8.828 10l-3.176 3.176a1 1 0 101.414 1.414L10 12.828l3.176 3.176a1 1 0 101.414-1.414L11.172 10l3.176-3.176z" />
+            </svg>
+        </button>
+    </div>
+@endif
+
+
                     <div class="overflow-x-auto">
     <table class="table-auto w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
